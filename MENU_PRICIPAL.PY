@@ -12,8 +12,6 @@ turistas={"001": ["John Doe", "Estados Unidos", "12-01-2024"],
           "010": ["Martin Fernandez", "Argentina", "13-02-2023"],
           "011": ["Sofia Gomez", "Argentina", "07-04-2024"]
           }
-
-#FUNCION TURISTAS POR PAIS
 def turistas_por_pais():
     pais_buscado = input("Ingrese el país a buscar en Turistas: ").strip().lower()
     encontrados = False
@@ -41,6 +39,8 @@ def turistas_por_mes():
     if not encontrados:
         print("No hay turistas registrados para ese mes.")
 
+#turistas_por_mes()
+
 # Funcion Eliminar Turista
 def eliminar_turista():
     nombre_buscado = input("Ingrese el nombre del turista a eliminar: ").strip().lower()
@@ -55,8 +55,8 @@ def eliminar_turista():
             encontrado = True
             break #(Se elimina el primer turista que coincide  el nombre)
     if not encontrado :
-        print("Turista no encontrado. No se pudo eliminar.") 
-
+        print("Turista no encontrado. No se pudo eliminar.")    
+#eliminar_turista()
 
 # Menu_principal(Main)
 while True:
@@ -79,5 +79,4 @@ while True:
     else:
         print(" Ingrese sólo valores dentro del rango 1 a 4")
 
-
-
+        
