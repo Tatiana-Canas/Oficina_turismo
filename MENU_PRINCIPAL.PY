@@ -13,7 +13,18 @@ turistas={"001": ["John Doe", "Estados Unidos", "12-01-2024"],
           "011": ["Sofia Gomez", "Argentina", "07-04-2024"]
           }
 
-
+#FUNCION TURISTAS POR PAIS
+def turistas_por_pais():
+    pais_buscado = input("Ingrese el país a buscar en Turistas: ").strip().lower()
+    encontrados = False
+    print(f"\nTuristas provenientes de {pais_buscado.title()}:")
+    for id_turista, datos in turistas.items():
+        nombre, pais, fecha = datos
+        if pais.lower() == pais_buscado:
+            print(f"ID: {id_turista} | Nombre: {nombre} | País: {pais} | Fecha: {fecha}")
+            encontrados = True
+    if not encontrados:
+        print("No hay turistas registrados de ese país.")
 
 
 
@@ -38,3 +49,4 @@ while True:
         break
     else:
         print(" Ingrese sólo valores dentro del rango 1 a 4")
+
