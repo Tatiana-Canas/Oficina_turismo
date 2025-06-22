@@ -2,7 +2,7 @@
 turistas={"001": ["John Doe", "Estados Unidos", "12-01-2024"],
           "002": ["Emily Smith", "Estados Unidos", "23-03-2024"],
           "012": ["Julian Martinez", "Argentina", "19-09-2023"],
-          "014": ["Agustin Morales", "Argentina", "8-03-2024"],
+          "014": ["Agustin Morales", "Argentina", "08-03-2024"],
           "005": ["Garcia", "Mexico", "10-05-2024"],
           "006": ["Maria Lopez", "Mexico", "08-12-2023"],
           "007": ["Joao Silva", "Brasil", "20-06-2024"],
@@ -27,19 +27,36 @@ def turistas_por_pais():
         print("No hay turistas registrados de ese país.")
 
 #turistas_por_mes()
-
 def turistas_por_mes():
-    mes_buscado = input("Ingrese el número del mes a buscar (01 a 12): ").strip().zfill(2)
-    encontrados = False
-    print(f"\nTuristas que visitaron en el mes {mes_buscado}:")
+    mes_buscado = input("Ingrese el número del mes a buscar (1 a 12): ").strip()
+
+    # Validar que sea un número válido del 1 al 12
+    if not mes_buscado.isdigit() or not (1 <= int(mes_buscado) <= 12):
+        print("❌ Mes inválido. Ingrese un número del 1 al 12.")
+        return
+    
+    mes_buscado = mes_buscado.zfill(2)  # Convertimos '2' → '02' para comparar con fechas
+    encontrados = []
+
     for id_turista, datos in turistas.items():
         nombre, pais, fecha = datos
-        partes_fecha = fecha.split("-")  # ['8', '03', '2024'] o ['12', '01', '2024']
-        mes = partes_fecha[1]  # El segundo elemento siempre es el mes
-        if mes == mes_buscado:
-            print(f"ID: {id_turista} | Nombre: {nombre} | País: {pais} | Fecha: {fecha}")
-    if not encontrados:
-        print("No hay turistas registrados para ese mes.")
+        partes_fecha = fecha.strip().split("-")
+
+        if len(partes_fecha) == 3:
+            _, mes, _ = partes_fecha
+            mes = mes.zfill(2)  # Asegura comparación correcta
+            if mes == mes_buscado:
+                encontrados.append(f"ID: {id_turista} | Nombre: {nombre} | País: {pais} | Fecha: {fecha}")
+        else:
+            print(f"⚠️ Fecha mal formateada para turista ID {id_turista}: {fecha}")
+
+    if encontrados:
+        print(f"\nTuristas que visitaron en el mes {int(mes_buscado)}:")
+        for turista in encontrados:
+            print(turista)
+    else:
+        print("No hay turistas registrados para ese mes.")  
+
 
 # Funcion Eliminar Turista
 def eliminar_turista():
